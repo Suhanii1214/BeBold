@@ -1,0 +1,9 @@
+@import "../../../css-config/mixins.scss";
+
+.banner-slider {
+    margin: 10px;
+    img {
+        width: 1200px;
+        border-radius: 10px;
+    }
+}
