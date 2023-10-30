@@ -1,0 +1,66 @@
+@import "../../../css-config/mixins.scss";
+.main-container {
+    margin: 50px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .heading{
+        margin: 40px 30px;
+        font-weight: 700;
+        font-size: 40px;
+    }
+    .input-container{
+        input {
+            padding: 10px 8px;
+            margin-bottom: 20px;
+            width: 100%;
+            border-radius: 6px;
+            border-width: 0px;
+            color: rgb(17, 24, 39);
+        }
+        .ctas {
+            display: flex;
+            flex-direction: row;
+            .update-btn {
+                padding: 6px 8px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-right: 20px;
+                width: 100%;
+                border-radius: 6px;
+                border-width: 0px;
+                font-weight: 500;
+                font-size: 16px;
+                color: white;
+                cursor: pointer;
+                background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+            .logout-btn {
+                padding: 6px 8px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                width: 100%;
+                border-radius: 6px;
+                font-weight: 500;
+                font-size: 16px;
+                color: white;
+                background-color: white;
+                cursor: pointer;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+    span {
+        color: #8e2de2;
+        cursor: pointer;
+    }
+    .error-message{
+        color: red;
+    }
+}

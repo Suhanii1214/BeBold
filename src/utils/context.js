@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { getToken } from "./helper";
+import axios from "axios";
 
 export const Context = createContext();
 
@@ -11,12 +13,22 @@ const AppContext = ({children}) => {
     const [cartItems, setCartItems] = useState([])
     const [cartCount, setCartCount] = useState(0)
     const [cartSubtotal, setCartSubtotal] = useState(0)
+    const [userData, setUserData] = useState()
+    const [isLoading, setIsLoading] = useState(false)
+
+    const authToken = getToken();
 
     const location = useLocation()
 
     useEffect(() => {
         window.scrollTo(0,0)
     }, [location])
+
+    useEffect(() => {
+        if(authToken) {
+            fetchLoggedInUser(authToken);
+        }
+    }, [authToken])
 
     useEffect(() => {
         let count = 0;
@@ -56,6 +68,27 @@ const AppContext = ({children}) => {
         setCartItems(items);
     }
 
+    const fetchLoggedInUser = async (token) => {
+        setIsLoading(true);
+        try {
+            const {data} = await axios.get(`${process.env.REACT_APP_DEV_URL}/api/users/me`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            setUserData(data)
+        } catch (error) {
+            console.log(error);
+            return error;
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const handleUser = (user) => {
+        setUserData(user)
+    }
+
     return (
         <Context.Provider
             value={{
@@ -73,6 +106,9 @@ const AppContext = ({children}) => {
                 setCartCount,
                 cartSubtotal,
                 setCartSubtotal,
+                userData,
+                isLoading,
+                handleUser,
                 handleAddToCart,
                 handleRemoveFromCart,
                 handleCartProductQuantity 

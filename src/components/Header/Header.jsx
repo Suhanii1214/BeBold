@@ -2,8 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import {useNavigate} from 'react-router-dom'
 import {HiUser, HiShoppingBag, HiChevronDown, HiChevronUp} from 'react-icons/hi'
 import {TbSearch} from 'react-icons/tb'
-import {CgShoppingCart} from 'react-icons/cg'
-import {AiOutlineHeart} from 'react-icons/ai'
+import { getToken } from "../../utils/helper";
 
 import  Search  from "./Search/Search";
 import Cart from '../Cart/Cart'
@@ -45,7 +44,7 @@ const Header = () => {
                 <TbSearch/>
             </div>
             <div className="right">
-                <HiUser className="profile-icon"/>
+                <HiUser className="profile-icon" onClick={() => navigate('/login')}/>
                 <span className="cart-icon" onClick={() => setShowCart(true)}>
                     <HiShoppingBag/>
                     {!!cartCount && <span>{cartCount}</span>}
