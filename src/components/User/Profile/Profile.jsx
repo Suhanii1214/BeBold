@@ -35,6 +35,7 @@ const Profile = () => {
             })
             const responseData = response.data
             handleUser(responseData)
+            navigate('/')
         } catch (error) {
             console.error(error)
             setError(error.message)
@@ -45,7 +46,7 @@ const Profile = () => {
 
     const handleLogout = () => {
         removeToken();
-        navigate("/signin", { replace: true });
+        navigate("/login", { replace: true });
       };
 
   return (
@@ -80,7 +81,6 @@ const Profile = () => {
             <div className='ctas'>
                 <button type='submit' className='update-btn'>
                     {loading ? "Saving.." : "Save"}
-                    {navigate('/')}
                 </button>
                 <button onClick={handleLogout} className='logout-btn'>Log Out</button>
             </div>

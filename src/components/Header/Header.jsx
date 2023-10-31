@@ -6,14 +6,18 @@ import { getToken } from "../../utils/helper";
 
 import  Search  from "./Search/Search";
 import Cart from '../Cart/Cart'
-
 import "./Header.scss";
 import { Context } from "../../utils/context";
+import BrandsPopoverMenu from "../Home/BrandsPopoverMenu/BrandsPopoverMenu";
+import { fetchDataFromApi } from "../../utils/api";
+
 const Header = () => {
     const [scroll, setScroll] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
+    const [showBrandsPopover, setShowBrandsPopover] = useState(false)
+    const [brandsAnchorEl, setBrandsAnchorEl] = useState(null)
     const navigate = useNavigate()
-    const { cartCount, showCart, setShowCart } = useContext(Context);
+    const { cartCount, showCart, setShowCart, brandsPopover, setBrandsPopover } = useContext(Context);
 
     const handleScroll = () => {
         const offset = window.scrollY;
@@ -25,8 +29,30 @@ const Header = () => {
     }
 
     useEffect(() => {
+        getBrandsPopover()
+    }, [])
+
+    useEffect(() => {
         window.addEventListener("scroll", handleScroll)
     }, [])
+
+    const getBrandsPopover = () => {
+        fetchDataFromApi("/api/brands?populate=*")
+        .then(res => {
+            console.log(res);
+            setBrandsPopover(res)
+        })
+    }
+
+    const handleBrandsPopoverOpen = (event) => {
+        setBrandsAnchorEl(event.currentTarget)
+        setShowBrandsPopover(true)
+    }
+
+    const handleBrandsPopoverClose = () => {
+        setBrandsAnchorEl(null)
+        setShowBrandsPopover(false)
+    }
 
     return <>
     <header className={`main-header ${scroll ? 'sticky-header' : ''}`}>
@@ -34,7 +60,14 @@ const Header = () => {
             <div className="left">
             <div className="logo" onClick={() => navigate("/")}>BE:BOLD</div>
             <ul>
-                <li>Brands</li>
+                <li
+                    onMouseEnter={handleBrandsPopoverOpen}
+                >
+                    <div className="brand-list">
+                        Brands
+                        <HiChevronDown size={20}/>
+                    </div>
+                </li>
                 <li>Category</li>
                 <li>Best Sellers</li>
             </ul>
@@ -44,7 +77,9 @@ const Header = () => {
                 <TbSearch/>
             </div>
             <div className="right">
-                <HiUser className="profile-icon" onClick={() => navigate('/login')}/>
+                {getToken() ? 
+                    <HiUser className="profile-icon" onClick={() => navigate('/profile')}/> 
+                    : <span className="login-text" onClick={() => navigate('/login')}>Log In</span>}
                 <span className="cart-icon" onClick={() => setShowCart(true)}>
                     <HiShoppingBag/>
                     {!!cartCount && <span>{cartCount}</span>}
@@ -54,6 +89,12 @@ const Header = () => {
     </header>
     {showCart && <Cart setShowCart={setShowCart}/>}
     {showSearch && <Search setShowSearch={setShowSearch}/>}
+    <BrandsPopoverMenu
+        brandsPopover={brandsPopover}
+        anchorEl = {brandsAnchorEl}
+        open = {showBrandsPopover}
+        onClose = {handleBrandsPopoverClose}
+    />
     </>
 };
 

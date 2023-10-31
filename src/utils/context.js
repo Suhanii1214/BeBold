@@ -9,6 +9,7 @@ const AppContext = ({children}) => {
     const [categories, setCategories] = useState()
     const [products, setProducts] = useState()
     const [luxeBrands, setLuxeBrands] = useState()
+    const [brandsPopover, setBrandsPopover] = useState()
     const [showCart, setShowCart] = useState(false)
     const [cartItems, setCartItems] = useState([])
     const [cartCount, setCartCount] = useState(0)
@@ -98,6 +99,8 @@ const AppContext = ({children}) => {
                 setProducts,
                 luxeBrands, 
                 setLuxeBrands,
+                brandsPopover, 
+                setBrandsPopover,
                 cartItems,
                 setCartItems,
                 showCart,
