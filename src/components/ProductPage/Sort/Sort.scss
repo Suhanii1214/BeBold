@@ -1,0 +1,40 @@
+.sort-section{
+    margin: 30px 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .button-section{
+        display: flex;
+        .layout-buttons {
+            padding: 0.5rem 0.8rem;
+            margin-right: 5px;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            background-color: rgb(226, 225, 225);
+            svg {
+                font-size: 1.5rem;
+            }
+        }
+        .active {
+            background-color: black;
+            color: #fff;
+        }
+    }
+    .sorting-bar {
+        padding: 0.5rem;
+        cursor: pointer;
+        select {
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+            option{
+                padding: 0.5rem 0;
+                cursor: pointer;
+                height: 2rem;
+            }
+        }
+    }
+}

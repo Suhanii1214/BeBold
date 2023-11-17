@@ -7,7 +7,7 @@ export const Context = createContext();
 
 const AppContext = ({children}) => {
     const [categories, setCategories] = useState()
-    const [products, setProducts] = useState()
+    const [products, setProducts] = useState([])
     const [luxeBrands, setLuxeBrands] = useState()
     const [brandsPopover, setBrandsPopover] = useState()
     const [showCart, setShowCart] = useState(false)

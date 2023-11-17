@@ -22,6 +22,7 @@
             display: block;
             width: 100%;
         }
+
     }
     .prod-details {
         .name {
@@ -35,10 +36,20 @@
                 margin-bottom: 10px;
             }
         }
-        .price {
-            font-size: 18px;
-            @include md {
-                font-size: 24px;
+
+        .price-wishlist {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .price {
+                font-size: 18px;
+                @include md {
+                    font-size: 24px;
+                }
+            }
+    
+            .wishlist-filled-icon, .wishlist-icon{
+                margin-right: 10px;
             }
         }
     }

@@ -109,6 +109,13 @@
                     transform: scale(1.5);
                 }
             }
+            .wishlist-icon {
+                margin-top: 7px;
+                transition: all ease 0.3s;
+                &:hover{
+                    transform: scale(1.5);
+                }
+            }
             .cart-icon {
                 position: relative;
                 transition: all ease 0.3s;

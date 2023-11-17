@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import {useNavigate} from 'react-router-dom'
+import { BsSuitHeartFill } from "react-icons/bs";
 import {HiUser, HiShoppingBag, HiChevronDown, HiChevronUp} from 'react-icons/hi'
 import {TbSearch} from 'react-icons/tb'
 import { getToken } from "../../utils/helper";
@@ -68,7 +69,7 @@ const Header = () => {
                         <HiChevronDown size={20}/>
                     </div>
                 </li>
-                <li>Category</li>
+                <li onClick={() => navigate('/product-page')}>Products</li>
                 <li>Best Sellers</li>
             </ul>
             </div>
@@ -80,6 +81,9 @@ const Header = () => {
                 {getToken() ? 
                     <HiUser className="profile-icon" onClick={() => navigate('/profile')}/> 
                     : <span className="login-text" onClick={() => navigate('/login')}>Log In</span>}
+                <span className="wishlist-icon" onClick={() => navigate('/wishlist')}>
+                    <BsSuitHeartFill size={20}/>
+                </span>
                 <span className="cart-icon" onClick={() => setShowCart(true)}>
                     <HiShoppingBag/>
                     {!!cartCount && <span>{cartCount}</span>}
