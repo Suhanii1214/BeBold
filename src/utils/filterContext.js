@@ -6,7 +6,7 @@ import { fetchDataFromApi } from "./api";
 export const FilterContext = createContext();
 
 export const FilterContextProvider = ({ children }) => {
-    const { products, setProducts } = useContext(Context);
+    const { setProducts } = useContext(Context);
     const [filterProducts, setFilterProducts] = useState([]);
     const [allProducts, setAllProducts] = useState([]);
     const [gridView, setGridView] = useState(true);
@@ -17,8 +17,8 @@ export const FilterContextProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        sortingProducts()
-    },[sortingValue, filterProducts])
+        sortingProducts();
+    }, [sortingValue, filterProducts]);
 
     const getProducts = () => {
         fetchDataFromApi("/api/products?populate=*").then((res) => {
@@ -30,39 +30,36 @@ export const FilterContextProvider = ({ children }) => {
     };
 
     const handleSorting = (event) => {
-        const userSortValue = event.target.value
-        console.log(userSortValue);
-        setSortingValue(userSortValue);
+        const order = event.target.value;
+        console.log(order);
+        setSortingValue(order);
     };
 
-        const sortingProducts = () => {
-            if(!filterProducts || !filterProducts.length) {
-                return
+    const sortingProducts = () => {
+        if (!filterProducts || !filterProducts.length) {
+            return;
+        }
+
+        let newSortedData;
+
+        const sortingLogic = (a, b) => {
+            if (sortingValue === "lowest") {
+                return a.attributes.price - b.attributes.price;
             }
-            let tempSortedData = [...filterProducts]
-            let newSortedData;
-
-            const sortingLogic = (a, b) => {
-                for(let i=0;i<products.length;i++) {
-                    if (sortingValue === "lowest") {
-                        return a.data[i].attributes.price - b.data[i].attributes.price;
-                    }
-                    if (sortingValue === "highest") {
-                        return b.data[i].attributes.price - a.data[i].attributes.price;
-                    }
-                    if (sortingValue === "a-z") {
-                        return a.data[i].attributes.title.localeCompare(b.data[i].attributes.title);
-                    }
-                    if (sortingValue === "z-a") {
-                        return b.data[i].attributes.title.localeCompare(a.data[i].attributes.title);
-                    }
-                }
-
-                newSortedData = tempSortedData.sort(sortingLogic)
-                setFilterProducts(newSortedData)
+            if (sortingValue === "highest") {
+                return b.attributes.price - a.attributes.price;
+            }
+            if (sortingValue === "a-z") {
+                return a.attributes.title.localeCompare(b.attributes.title);
+            }
+            if (sortingValue === "z-a") {
+                return b.attributes.title.localeCompare(a.attributes.title);
             }
         };
 
+        newSortedData = [...filterProducts].sort(sortingLogic);
+        setFilterProducts(newSortedData);
+    };
 
     return (
         <FilterContext.Provider
@@ -80,4 +77,3 @@ export const FilterContextProvider = ({ children }) => {
         </FilterContext.Provider>
     );
 };
-
