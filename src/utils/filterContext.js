@@ -6,11 +6,12 @@ import { fetchDataFromApi } from "./api";
 export const FilterContext = createContext();
 
 export const FilterContextProvider = ({ children }) => {
-    const { setProducts } = useContext(Context);
+    const { products, setProducts } = useContext(Context);
     const [filterProducts, setFilterProducts] = useState([]);
     const [allProducts, setAllProducts] = useState([]);
     const [gridView, setGridView] = useState(true);
     const [sortingValue, setSortingValue] = useState("lowest");
+    const [selectedFilter, setSelectedFilter] = useState(null);
 
     useEffect(() => {
         getProducts();
@@ -18,7 +19,8 @@ export const FilterContextProvider = ({ children }) => {
 
     useEffect(() => {
         sortingProducts();
-    }, [sortingValue, filterProducts]);
+        filteredData(products, selectedFilter);
+    }, [sortingValue, products, selectedFilter]);
 
     const getProducts = () => {
         fetchDataFromApi("/api/products?populate=*").then((res) => {
@@ -33,6 +35,10 @@ export const FilterContextProvider = ({ children }) => {
         const order = event.target.value;
         console.log(order);
         setSortingValue(order);
+    };
+
+    const handleFiltering = (event) => {
+        setSelectedFilter(event.target.value);
     };
 
     const sortingProducts = () => {
@@ -61,6 +67,20 @@ export const FilterContextProvider = ({ children }) => {
         setFilterProducts(newSortedData);
     };
 
+    const filteredData = (products, selected) => {
+        let filteredItems = products; // Clone the array to avoid mutating the state directly
+
+        if (selected) {
+            filteredItems = filteredItems.data.filter((item) => (
+                item.attributes.type === selected ||
+                item.attributes.price === selected ||
+                item.attributes.brand === selected
+            ));
+        }
+
+        setFilterProducts(filteredItems);
+    };
+
     return (
         <FilterContext.Provider
             value={{
@@ -71,6 +91,7 @@ export const FilterContextProvider = ({ children }) => {
                 setGridView: () => setGridView(true),
                 setListView: () => setGridView(false),
                 handleSorting,
+                handleFiltering,
             }}
         >
             {children}
