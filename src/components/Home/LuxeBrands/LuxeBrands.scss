@@ -2,6 +2,9 @@
 
 .main-container {
     margin: 10px 30px;
+    display: flex; /* Add flex display to main container */
+    flex-direction: column; /* Arrange children in a column */
+    
     .brand-heading {
         margin-bottom: 20px;
         font-size: 18px;
@@ -23,15 +26,17 @@
             }
         }
     }
+
     .brands-container {
         display: flex;
         flex-direction: row;
-        flex-flow: wrap;
+        flex-wrap: wrap; /* Updated to flex-wrap */
         justify-content: space-between;
         gap: 10px;
         @include md {
             gap: 20px;
         }
+
         .img-container {
             cursor: pointer;
             width: calc(50% - 5px);

@@ -1,5 +1,4 @@
 import { MdClose } from "react-icons/md";
-import prod from '../../../assets/productImages/conditioner.png'
 import "./CartItem.scss";
 import { useContext } from "react";
 import { Context } from "../../../utils/context";

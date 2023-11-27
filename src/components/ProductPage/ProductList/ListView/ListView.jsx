@@ -6,11 +6,10 @@ import { fetchDataFromApi } from '../../../../utils/api'
 import { BsSuitHeart, BsSuitHeartFill } from 'react-icons/bs'
 
 import './ListView.scss'
-import { FilterContext } from '../../../../utils/filterContext'
 
-const ListView = () => {
+const ListView = ({products}) => {
     const navigate = useNavigate()
-    const {filterProducts} = useContext(FilterContext)
+    // const {filterProducts} = useContext(FilterContext)
     const [isInWishlist, setisInWishlist] = useState(false)
 
     const handleWishlistIcon = (e) => {
@@ -25,10 +24,10 @@ const ListView = () => {
         <div>
             <div className='sec-heading'>Products</div>
             <div className='products'>
-                {filterProducts?.data?.map(item => (
+                {products?.data?.map(item => (
                     <div key={item.id} className="product-card" onClick={() => navigate("/product/" + item.id)}>
                         <div className='thumbnail'>
-                            <img src={process.env.REACT_APP_DEV_URL + item.attributes.prodImage.data[0].attributes.url} alt="product"/>
+                            <img src={process.env.REACT_APP_DEV_URL + item.attributes.prodImage?.data[0]?.attributes.url} alt="product"/>
                         </div>
                         <div className='prod-details'>
                             <span className="name">{item.attributes.title}</span>

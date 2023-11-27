@@ -20,8 +20,7 @@ const Footer = () => {
                     <div className="c-item">
                         <FaLocationArrow />
                         <div className="text">
-                            Kayaloram Rd, Punnamada, Kottankulangara, Alappuzha,
-                            Kerala, 688006
+                            Lovely Professional University, Jalandhar, Punjab - 144411
                         </div>
                     </div>
                     <div className="c-item">
@@ -30,17 +29,17 @@ const Footer = () => {
                     </div>
                     <div className="c-item">
                         <FaEnvelope />
-                        <div className="text">Email: store@jsdev.com</div>
+                        <div className="text">Email: store@bebold.com</div>
                     </div>
                 </div>
                 <div className="col">
                     <div className="title">Categories</div>
-                    <span className="text">Headphones</span>
-                    <span className="text">Smart Watches</span>
-                    <span className="text">Bluetooth Speakers</span>
-                    <span className="text">Wireless Earbuds</span>
-                    <span className="text">Home Theatre</span>
-                    <span className="text">Projectors</span>
+                    <span className="text">Mosturizer</span>
+                    <span className="text">Serum</span>
+                    <span className="text">Shampoo</span>
+                    <span className="text">Conditioners</span>
+                    <span className="text">Masks</span>
+                    <span className="text">Face Cleanser</span>
                 </div>
                 <div className="col">
                     <div className="title">Pages</div>
@@ -55,8 +54,7 @@ const Footer = () => {
             <div className="bottom-bar">
                 <div className="bottom-bar-content">
                     <span className="text">
-                        JSDEVSTORE 2022 CREATED BY JS DEV. PREMIUM E-COMMERCE
-                        SOLUTIONS.
+                        BE:BOLD Ecommerce CREATED BY SUHANI SINGH
                     </span>
                     <img src={Payment} />
                 </div>

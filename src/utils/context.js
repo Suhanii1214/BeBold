@@ -16,6 +16,7 @@ const AppContext = ({children}) => {
     const [cartSubtotal, setCartSubtotal] = useState(0)
     const [userData, setUserData] = useState()
     const [isLoading, setIsLoading] = useState(false)
+    const [gridView, setGridView] = useState(true);
 
     const authToken = getToken();
 
@@ -114,7 +115,10 @@ const AppContext = ({children}) => {
                 handleUser,
                 handleAddToCart,
                 handleRemoveFromCart,
-                handleCartProductQuantity 
+                handleCartProductQuantity,
+                gridView,
+                setGridView: () => setGridView(true),
+                setListView: () => setGridView(false),
             }}
         >
             {children}

@@ -2,15 +2,14 @@ import React, { useContext, useEffect } from 'react'
 import Products from '../../../Products/Products'
 import { Context } from '../../../../utils/context'
 import { fetchDataFromApi } from '../../../../utils/api'
-import { FilterContext } from '../../../../utils/filterContext'
 
-const GridView = () => {
-    const {filterProducts} = useContext(FilterContext)
+const GridView = ({products}) => {
+    // const {filterProducts} = useContext(FilterContext)
 
   return (
     <div className='grid-section'>
         <div>
-            <Products headingText="Products" products={filterProducts}/>
+            <Products headingText="Products" products={products}/>
         </div>
     </div>
   )

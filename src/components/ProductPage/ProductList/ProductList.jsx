@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react'
-import { FilterContext } from '../../../utils/filterContext'
 import GridView from './GridView/GridView'
 import ListView from './ListView/ListView'
+import { Context } from '../../../utils/context'
 
-const ProductList = () => {
-    const {filterProducts, gridView} = useContext(FilterContext)
+const ProductList = ({products}) => {
+    const {gridView} = useContext(Context)
 
   return (
     <div>
-        {gridView ? <GridView products={filterProducts}/> : <ListView products={filterProducts}/>}
+        {gridView ? <GridView products={products}/> : <ListView products={products}/>}
     </div>
   )
 }

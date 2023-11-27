@@ -11,12 +11,12 @@ const Product = ({id, data, onWishlistToggle}) => {
         e.stopPropagation();
 
         setisInWishlist(prev => !prev)
-        onWishlistToggle(id, !isInWishlist, data);
+        // onWishlistToggle(id, !isInWishlist, data);
     }
 
     return <div className="product-card" onClick={() => navigate("/product/" + id)}>
         <div className="thumbnail">
-            <img src={process.env.REACT_APP_DEV_URL + data.prodImage.data[0].attributes.url} alt="product"/>
+            <img src={process.env.REACT_APP_DEV_URL + data?.prodImage?.data[0].attributes.url} alt="product"/>
         </div>
         <div className="prod-details">
             <span className="name">{data.title}</span>

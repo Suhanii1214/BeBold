@@ -34,7 +34,7 @@ const Home = () => {
     }
 
     const getProducts = () => {
-        fetchDataFromApi("/api/products?populate=*")
+        fetchDataFromApi("/api/products?populate=*&pagination[start]=0&pagination[limit]=4")
         .then(res => {
             console.log(res)
             setProducts(res)

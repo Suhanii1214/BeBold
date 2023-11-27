@@ -1,18 +1,22 @@
 import React, { useContext } from 'react'
-import { FilterContext } from '../../../utils/filterContext'
-import Category from './Category/Category'
-import Brands from './Brands/Brands'
-import Price from './Price/Price'
+import './FilterSection.scss'
+import Select from "react-select"
 
-const FilterSection = () => {
-
-  const {handleFiltering} = useContext(FilterContext)
-
+const FilterSection = ({options, selectedOption, onChange, title, name}) => {
   return (
-    <div>
-        <Category handleFiltering = {handleFiltering}/>
-        <Brands handleFiltering = {handleFiltering}/>
-        <Price handleFiltering = {handleFiltering}/>
+    <div className='main-container'>
+      <h4 className='input-title'>{title}</h4>
+      <Select
+        className='input-container'
+        name={name}
+        options={options}
+        value={selectedOption}
+        onChange={onChange}
+        isClearable
+        getOptionValue={(option) => option.value} // Specify the property used as value
+        getOptionLabel={(option) => option.label}
+        placeholder="Select.."
+      />
     </div>
   )
 }
